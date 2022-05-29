@@ -1,0 +1,10 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    justify-content: space-between;
+}
+
+.bar {
+    background-color: black;
+}
