@@ -15,10 +15,6 @@
 const char* ssid = "saad";            // Your SSID
 const char* password = "saad5215";  // Your Password
 
-int interval = 100;                // virtual delay
-unsigned long previousMillis = 0;  // Tracks the time since last event fired
-
-
 void webSocketEvent(byte num, WStype_t type, uint8_t* payload, size_t length);
 
 const char index_html[] PROGMEM = R"rawliteral(
@@ -133,17 +129,19 @@ WebSocketsServer webSocket = WebSocketsServer(81);  //create instance for webSoc
 
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED1, OUTPUT);                    // Set PIN22 As output(LED Pin)
-  pinMode(LED2, OUTPUT);                    // Set PIN22 As output(LED Pin)
-  pinMode(LED3, OUTPUT);                    // Set PIN22 As output(LED Pin)
+  // set all the pins to output mode
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
   
   Serial.begin(115200);                    // Init Serial for Debugging.
+  // connect to wifi network
   WiFi.begin(ssid, password);              // Connect to Wifi
   while (WiFi.status() != WL_CONNECTED) {  // Check if wifi is connected or not
     delay(500);
     Serial.print(".");
   }
+  // print the ip address
   Serial.println();
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
